@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670777604733",
+    "project_id": "immobila-e811d",
+    "storage_bucket": "immobila-e811d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670777604733:android:b92645e8c72794b2684f14",
+        "android_client_info": {
+          "package_name": "com.example.immobiliakamer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOr-3BmXvES5sVKHSXatWUZMgijxWDVGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
