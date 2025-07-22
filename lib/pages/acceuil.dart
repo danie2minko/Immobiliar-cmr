@@ -56,7 +56,7 @@ class _AcceuilState extends State<Acceuil> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: ListView(
         children: [
-          // Barre de recherche iOS style
+          // Barre de recherche 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             child: Container(

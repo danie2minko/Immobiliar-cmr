@@ -38,7 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
     String initialMessage;
     if (widget.product != null) {
       initialMessage =
-          "Bonjour ! Je suis ImmobiliaBot. Comment puis-je vous aider avec l'annonce pour ce ${widget.product!.type} à ${widget.product!.quartier} ?";
+          "Bonjour ! Je suis ImmobiliaBot. Comment puis-je vous aider avec l'annonce pour ${widget.product!.type} à ${widget.product!.quartier} ?";
     } else {
       initialMessage =
           "Bonjour ! Je suis ImmobiliaBot, votre assistant immobilier. Comment puis-je vous aider aujourd'hui ?";
@@ -273,7 +273,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ? () => _handleSubmitted(_textController.text)
                 : null, // Le bouton est désactivé si le champ est vide
             child: Icon(
-              CupertinoIcons.arrow_up_circle_fill,
+              Icons.send,
               size: 32,
               color: Theme.of(context).colorScheme.primary,
             ),

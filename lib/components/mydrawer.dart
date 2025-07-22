@@ -13,11 +13,7 @@ class Mydrawer extends StatelessWidget {
           // drawerheader
           DrawerHeader(
               child: Center(
-            child: Icon(
-              Icons.real_estate_agent,
-              size: 100,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
+            child: Image.asset('assets/images/Immobilia1.png', width: 300, height: 300),
           )),
           SizedBox(
             height: 25,

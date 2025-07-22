@@ -236,7 +236,7 @@ class Myproducttile extends StatelessWidget {
                                   );
                                 }
                               },
-                              icon: const Icon(CupertinoIcons.chat_bubble_2,
+                              icon: const Icon(Icons.chat_bubble_outline,
                                   size: 18, color: Colors.white),
                               label: const Text('Contacter',
                                   style: TextStyle(color: Colors.white)),

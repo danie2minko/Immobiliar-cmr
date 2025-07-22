@@ -63,7 +63,7 @@ class _ProfilState extends State<Profil> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text("Photo de profil mise à jour ! (stockage local)")),
+              content: Text("Photo de profil mise à jour ! ")),
         );
       }
     } catch (e) {
@@ -274,7 +274,9 @@ class _ProfilState extends State<Profil> {
                             ),
                             SizedBox(height: 10),
                             _buildSimpleTile('Compte'),
+                            SizedBox(height: 5),
                             _buildSimpleTile('Confidentialité'),
+                            SizedBox(height: 5),
                             _buildSimpleTile('Aide'),
                           ],
                         ),

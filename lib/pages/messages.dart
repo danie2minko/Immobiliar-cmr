@@ -156,10 +156,10 @@ class _MessagesState extends State<Messages> {
       // TODO: Implémenter la liste des conversations récentes.
       // Pour l'instant, on affiche un message d'accueil.
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           title: const Text('Messagerie'),
-          backgroundColor: Theme.of(context).colorScheme.surface,
+          backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
         ),
         body: Center(
@@ -167,7 +167,7 @@ class _MessagesState extends State<Messages> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                CupertinoIcons.chat_bubble_2,
+                Icons.chat_bubble_outline,
                 size: 64,
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -655,7 +655,7 @@ class _MessagesState extends State<Messages> {
                 radius: 16,
                 backgroundColor: Theme.of(context).colorScheme.secondary,
                 child: Icon(
-                  CupertinoIcons.person_fill,
+                  Icons.person,
                   size: 16,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -762,7 +762,7 @@ class _MessagesState extends State<Messages> {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  CupertinoIcons.arrow_up,
+                   Icons.arrow_upward,
                   color: _isComposing
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context)

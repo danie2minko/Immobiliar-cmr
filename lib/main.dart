@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:immobiliakamer/pages/splashcreen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'firebase_options.dart';
 
-// Import des pages
+import 'pages/splashcreen.dart';
 import 'auth/main_page.dart';
 import 'pages/homescreen.dart';
 import 'pages/acceuil.dart';
@@ -14,9 +15,9 @@ import 'pages/messages.dart';
 import 'pages/acheter.dart';
 import 'pages/partage.dart';
 
-// Import des modèles et thèmes
+
 import 'models/shop.dart';
-import 'models/products.dart'; // Importation du modèle Products
+import 'models/products.dart'; 
 import 'themes/lightmode.dart';
 
 void main() async {
@@ -29,9 +30,9 @@ void main() async {
   );
   Gemini.init(
       apiKey:
-          "AIzaSyC3cdxJrrEZ15dhj6TeU9hbEh2stAXeI2E"); //TODO: Add your Gemini API key here
+          "AIzaSyC3cdxJrrEZ15dhj6TeU9hbEh2stAXeI2E"); 
 
-  // Lancement de l'application
+ 
   runApp(const MyApp());
 }
 
@@ -47,9 +48,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightMode,
 
-        // Page d'accueil - MainPage gère l'authentification
-        home: const MainPage(), // Définition des routes nommées
+       
+        home: SplashScreen(),
         routes: {
+          '/mainpage': (context)=> const MainPage(),
           '/homescreen': (context) => const Homescreen(),
           '/acceuil': (context) => const Acceuil(),
           '/profile': (context) => const Profil(),

@@ -134,10 +134,26 @@ User? get currentUser => _auth.currentUser;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text('Publier un bien'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
           // ...existing code...
-
+          SizedBox(height: 30,),
+          Image.asset('assets/images/shareImg.png'),
+         Positioned(child:  Text('Partagez votre bien',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              )),
+              top: 250,
+              left: 20,
+              ),
           // draggable sheet
           DraggableScrollableSheet(
             controller: _controller,
@@ -402,6 +418,95 @@ User? get currentUser => _auth.currentUser;
                                               const SizedBox(height: 10),
                                               Text(
                                                 'Ajouter une photo du bien',
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                                decoration: BoxDecoration(
+                                                  color: Theme.of(context).colorScheme.primary,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Text(
+                                                  'Choisir une image',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Container(
+                                height: 200,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    border:
+                                        Border.all(color: Colors.grey.shade300),
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: _selectedImage != null
+                                    ? Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            child: Image.file(
+                                              _selectedImage!,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 8,
+                                            right: 8,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  _selectedImage = null;
+                                                });
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : GestureDetector(
+                                        onTap: _pickImage,
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.add_a_photo,
+                                                size: 50,
+                                                color: Colors.grey,
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Text(
+                                                'Ajouter une photo de CNI',
                                                 style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 16,
