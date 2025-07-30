@@ -16,8 +16,8 @@ class _PublishState extends State<Publish> {
   final DraggableScrollableController _controller =
       DraggableScrollableController();
   final _formKey = GlobalKey<FormState>();
-final FirebaseAuth _auth = FirebaseAuth.instance;
-User? get currentUser => _auth.currentUser;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? get currentUser => _auth.currentUser;
 // Services et contrôleurs pour le backend
   final ProductService _productService = ProductService();
   final AuthService _authService = AuthService();
@@ -34,6 +34,7 @@ User? get currentUser => _auth.currentUser;
   final TextEditingController _ownerEmailController = TextEditingController();
 
   File? _selectedImage;
+  File? _selectedImagecni;
   bool _isLoading = false;
 
   @override
@@ -74,6 +75,27 @@ User? get currentUser => _auth.currentUser;
     }
   }
 
+  Future<void> _pickImagecni() async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
+      );
+
+      if (image != null) {
+        setState(() {
+          _selectedImagecni = File(image.path);
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erreur lors de la sélection de l'image: $e")),
+      );
+    }
+  }
+
   Future<void> _submitForm() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -94,6 +116,7 @@ User? get currentUser => _auth.currentUser;
         ownerPhone: _ownerPhoneController.text.trim(),
         ownerEmail: _ownerEmailController.text.trim(),
         imageFile: _selectedImage,
+        cniImageFile: _selectedImagecni,
         ownerId: currentUser?.uid,
       );
 
@@ -111,6 +134,7 @@ User? get currentUser => _auth.currentUser;
           _quartierController.clear();
           _descriptionController.clear();
           _selectedImage = null;
+          _selectedImagecni = null;
         });
         // Retourner à l'écran principal avec la navbar
         Navigator.pushReplacementNamed(context, '/homescreen');
@@ -136,24 +160,30 @@ User? get currentUser => _auth.currentUser;
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Publier un bien'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
       ),
       body: Stack(
         children: [
           // ...existing code...
-          SizedBox(height: 30,),
-          Image.asset('assets/images/shareImg.png'),
-         Positioned(child:  Text('Partagez votre bien',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              )),
-              top: 250,
-              left: 20,
-              ),
+          SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 60),
+            child: Image.asset('assets/images/update.png', height: 300,width: 300,),
+          ),
+          Positioned(
+            child: Text('Partagez votre bien',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                )),
+            top: 260,
+            left: 15,
+          ),
           // draggable sheet
           DraggableScrollableSheet(
             controller: _controller,
@@ -429,7 +459,9 @@ User? get currentUser => _auth.currentUser;
                                                     horizontal: 20,
                                                     vertical: 10),
                                                 decoration: BoxDecoration(
-                                                  color: Theme.of(context).colorScheme.primary,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
                                                   borderRadius:
                                                       BorderRadius.circular(20),
                                                 ),
@@ -446,6 +478,16 @@ User? get currentUser => _auth.currentUser;
                               ),
                             ),
                             const SizedBox(height: 10),
+
+                            Text(
+                              'Owner Details',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: Container(
@@ -455,14 +497,14 @@ User? get currentUser => _auth.currentUser;
                                     border:
                                         Border.all(color: Colors.grey.shade300),
                                     borderRadius: BorderRadius.circular(15)),
-                                child: _selectedImage != null
+                                child: _selectedImagecni != null
                                     ? Stack(
                                         children: [
                                           ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             child: Image.file(
-                                              _selectedImage!,
+                                              _selectedImagecni!,
                                               width: double.infinity,
                                               height: double.infinity,
                                               fit: BoxFit.cover,
@@ -474,7 +516,7 @@ User? get currentUser => _auth.currentUser;
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  _selectedImage = null;
+                                                  _selectedImagecni = null;
                                                 });
                                               },
                                               child: Container(
@@ -493,7 +535,7 @@ User? get currentUser => _auth.currentUser;
                                         ],
                                       )
                                     : GestureDetector(
-                                        onTap: _pickImage,
+                                        onTap: _pickImagecni,
                                         child: Center(
                                           child: Column(
                                             mainAxisAlignment:
@@ -518,7 +560,9 @@ User? get currentUser => _auth.currentUser;
                                                     horizontal: 20,
                                                     vertical: 10),
                                                 decoration: BoxDecoration(
-                                                  color: Theme.of(context).colorScheme.primary,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
                                                   borderRadius:
                                                       BorderRadius.circular(20),
                                                 ),
@@ -535,15 +579,8 @@ User? get currentUser => _auth.currentUser;
                               ),
                             ),
                             const SizedBox(height: 10),
-                            Text(
-                              'Owner Details',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
                             //SizedBox(height: 5),
+
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: Container(
@@ -633,7 +670,8 @@ User? get currentUser => _auth.currentUser;
                             const SizedBox(height: 24),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Theme.of(context).colorScheme.primary,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
                                 foregroundColor: Colors.white,
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16),

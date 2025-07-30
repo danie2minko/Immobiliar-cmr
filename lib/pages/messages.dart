@@ -166,17 +166,13 @@ class _MessagesState extends State<Messages> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.chat_bubble_outline,
-                size: 64,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+              Image.asset('assets/images/messages.png',height: 200, width: 200,),
               const SizedBox(height: 16),
               Text(
                 'Pas de messages pour le moment',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),

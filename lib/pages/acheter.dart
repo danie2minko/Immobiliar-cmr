@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:immobiliakamer/components/mydrawer.dart';
 import 'package:immobiliakamer/components/myproducttile.dart';
 import 'package:immobiliakamer/models/products.dart';
@@ -21,7 +22,7 @@ class _AcheterState extends State<Acheter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Acheter"),
@@ -44,9 +45,17 @@ class _AcheterState extends State<Acheter> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Rechercher un bien...',
+                hintStyle: TextStyle(
+                  color: Colors.grey.shade300
+                ),
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade200,width: 4
+                  )
                 ),
                 filled: true,
                 fillColor: Colors.grey.shade200,
@@ -109,8 +118,7 @@ class _AcheterState extends State<Acheter> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.home_outlined,
-                            size: 100, color: Colors.grey),
+                        Image.asset('assets/images/indisponible.png'),
                         SizedBox(height: 16),
                         Text('Aucun bien immobilier disponible',
                             style: TextStyle(fontSize: 18, color: Colors.grey)),
@@ -144,8 +152,14 @@ class _AcheterState extends State<Acheter> {
                     ),
                   );
                 }
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
+                return GridView.builder(
+                  padding: const EdgeInsets.all(5),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    //mainAxisSpacing: 2,
+                    crossAxisSpacing: 3,
+                    childAspectRatio: 0.7
+                  ),
                   itemCount: filteredProducts.length,
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];

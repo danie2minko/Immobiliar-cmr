@@ -273,7 +273,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ? () => _handleSubmitted(_textController.text)
                 : null, // Le bouton est désactivé si le champ est vide
             child: Icon(
-              Icons.send,
+              Icons.arrow_upward,
               size: 32,
               color: Theme.of(context).colorScheme.primary,
             ),

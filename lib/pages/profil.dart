@@ -109,7 +109,7 @@ class _ProfilState extends State<Profil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Profil"),

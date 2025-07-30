@@ -19,7 +19,7 @@ class _AcceuilState extends State<Acceuil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -80,12 +80,12 @@ class _AcceuilState extends State<Acceuil> {
                 decoration: InputDecoration(
                   hintText: 'Rechercher...',
                   hintStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontSize: 16,
                   ),
                   prefixIcon: Icon(
                     Icons.search_rounded,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: Theme.of(context).colorScheme.secondary,
                     size: 22,
                   ),
                   suffixIcon: Row(
@@ -177,7 +177,7 @@ class _AcceuilState extends State<Acceuil> {
 
           // Liste des produits
           SizedBox(
-            height: 550,
+            height: 450,
             child: StreamBuilder<List<Products>>(
               stream: _productService.getProductsStream(),
               builder: (context, snapshot) {
@@ -194,8 +194,7 @@ class _AcceuilState extends State<Acceuil> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.home_outlined,
-                            size: 100, color: Colors.grey),
+                        Image.asset('assets/images/indisponible.png'),
                         SizedBox(height: 16),
                         Text('Aucun bien immobilier disponible',
                             style: TextStyle(fontSize: 18, color: Colors.grey)),
@@ -234,7 +233,7 @@ class _AcceuilState extends State<Acceuil> {
                   padding: const EdgeInsets.all(10),
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];
-                    return Myproducttile(products: product, width: 300);
+                    return Myproducttile(products: product,);
                   },
                 );
               },

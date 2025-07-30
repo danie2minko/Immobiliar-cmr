@@ -4,8 +4,7 @@ import 'package:immobiliakamer/models/products.dart';
 
 class Myproducttile extends StatelessWidget {
   final Products products;
-  final double? width; // Largeur optionnelle
-  const Myproducttile({super.key, required this.products, this.width});
+  const Myproducttile({super.key, required this.products});
   @override
   Widget build(BuildContext context) {
     // Debug: afficher l'URL de l'image dans la console
@@ -17,20 +16,21 @@ class Myproducttile extends StatelessWidget {
         '[Myproducttile] ${products.type} | imageUrl: ${products.imageUrl} | isValid: $isValidImageUrl');
     return SizedBox(
       child: Container(
+       
+        width: 260,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
+              color: Colors.black.withOpacity(0.10),
+              blurRadius: 25,
+              offset: const Offset(0, 8),
               spreadRadius: 0,
             ),
           ],
         ),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        width: width,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Column(

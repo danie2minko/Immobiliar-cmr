@@ -20,6 +20,7 @@ class ProductService {
     required String ownerPhone,
     required String ownerEmail,
     File? imageFile,
+    File? cniImageFile,
     String? ownerId, // ID du propriétaire, optionnel
   }) async {
     try {
@@ -31,6 +32,7 @@ class ProductService {
       }
 
       String? imageUrl;
+      String? imageUrl1;
 
       // Upload de l'image si fournie
       if (imageFile != null) {
@@ -43,12 +45,22 @@ class ProductService {
         }
       }
 
+      if (cniImageFile != null) {
+        imageUrl1 = await _uploadImage(cniImageFile);
+        if (imageUrl1 == null) {
+          print(
+              '🔴 L\'upload de l\'image a échoué. Le produit sera créé sans image.');
+        } else {
+          print('🟢 URL image uploadée: $imageUrl1');
+        }
+      }
+
       // Créer le map de données pour Firestore
       final Map<String, dynamic> productData = {
         'type': type,
         'description': description,
         'prix': prix,
-        
+
         'ville': ville,
         'quartier': quartier,
         'ownerId': currentUser.uid, // Ajout de l'ID du propriétaire

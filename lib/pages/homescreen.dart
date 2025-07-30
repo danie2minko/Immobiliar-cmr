@@ -58,15 +58,15 @@ class _HomescreenState extends State<Homescreen> {
             tabs: [
               GButton(
                 icon: Icons.home,
-                text: "Home",
+                text: "Acceuil",
               ),
               GButton(
                 icon: Icons.shopping_cart_rounded,
-                text: "Cart",
+                text: "Achat",
               ),
               GButton(
                 icon: Icons.upload,
-                text: "Share",
+                text: "Partage",
               ),
               GButton(
                 icon: Icons.message_rounded,
