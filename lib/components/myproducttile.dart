@@ -30,7 +30,7 @@ class Myproducttile extends StatelessWidget {
             ),
           ],
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Column(
@@ -52,9 +52,7 @@ class Myproducttile extends StatelessWidget {
                             height: double.infinity,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .surfaceVariant,
+                                color: Colors.grey.shade200,
                                 child: Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -143,16 +141,17 @@ class Myproducttile extends StatelessWidget {
                     ),
                   ),
                 ],
-              ), // Contenu de la carte
+              ), 
+              // Contenu de la carte
               Padding(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Type de propriété
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                          horizontal: 12, vertical: 5),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(8),
@@ -168,7 +167,7 @@ class Myproducttile extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 5),
 
                     // Localisation
                     Row(
@@ -196,7 +195,7 @@ class Myproducttile extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
 
                     // Description
                     Text(
@@ -209,10 +208,11 @@ class Myproducttile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 10), // Boutons d'action
+                    const SizedBox(height: 5), 
+                    // Boutons d'action
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 12.0),
+                          horizontal: 16.0, vertical: 10.0),
                       child: Row(
                         children: [
                           // Bouton de contact

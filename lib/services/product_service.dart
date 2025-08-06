@@ -67,7 +67,8 @@ class ProductService {
         'ownerName': ownerName,
         'ownerPhone': ownerPhone,
         'ownerEmail': ownerEmail,
-        'imageUrl': imageUrl, // Peut être null
+        'imageUrl': imageUrl,
+        'cniImageUrl': imageUrl1, 
         'createdAt': FieldValue.serverTimestamp(), // Utilise l'heure du serveur
       };
       print('🟢 Produit à stocker: \n$productData');

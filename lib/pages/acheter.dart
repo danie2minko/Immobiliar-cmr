@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:immobiliakamer/components/mydrawer.dart';
-import 'package:immobiliakamer/components/myproducttile.dart';
+import 'package:immobiliakamer/components/small_product.dart';
 import 'package:immobiliakamer/models/products.dart';
 import 'package:immobiliakamer/services/product_service.dart';
 
@@ -53,12 +53,13 @@ class _AcheterState extends State<Acheter> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide(
-                    color: Colors.grey.shade200,width: 4
+                    color: Colors.grey.shade200,width: 4,
                   )
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
+                fillColor: Colors.grey.shade100,
               ),
               onChanged: (value) {
                 setState(() {
@@ -156,19 +157,22 @@ class _AcheterState extends State<Acheter> {
                   padding: const EdgeInsets.all(5),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    //mainAxisSpacing: 2,
+                    mainAxisSpacing: 2,
                     crossAxisSpacing: 3,
                     childAspectRatio: 0.7
                   ),
                   itemCount: filteredProducts.length,
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];
-                    return Container(
+                    return
                      // height:MediaQuery.of(context).size.height * 0.6, // hauteur responsive
-                      margin: const EdgeInsets.only(bottom: 16),
-                      child: Myproducttile(
-                          products: product), // largeur responsive
-                    );
+                      
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: SmallProduct(
+                            products: product // largeur responsive
+                                             ),
+                       );
                   },
                 );
               },

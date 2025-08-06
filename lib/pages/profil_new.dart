@@ -404,8 +404,8 @@ class _ProfilState extends State<Profil> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),
@@ -454,7 +454,7 @@ class _ProfilState extends State<Profil> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),
@@ -487,7 +487,7 @@ class _ProfilState extends State<Profil> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),

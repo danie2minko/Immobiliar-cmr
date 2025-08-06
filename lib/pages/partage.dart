@@ -166,7 +166,6 @@ class _PublishState extends State<Publish> {
       ),
       body: Stack(
         children: [
-          // ...existing code...
           SizedBox(
             height: 30,
           ),
@@ -192,7 +191,7 @@ class _PublishState extends State<Publish> {
             maxChildSize: 0.9,
 
             snap: true,
-            snapSizes: const [0.3, 0.9], // S'arrête à 30% et 90%
+            snapSizes: const [0.3, 0.9], 
 
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
@@ -214,7 +213,7 @@ class _PublishState extends State<Publish> {
                 // Le contenu du sheet
                 child: Column(
                   children: [
-                    // La "poignée" pour indiquer que le sheet est draggable
+                    
                     Container(
                       width: 40,
                       height: 5,
@@ -225,7 +224,7 @@ class _PublishState extends State<Publish> {
                       ),
                     ),
 
-                    // Le reste du contenu doit être dans un Expanded pour que le scroll fonctionne
+                    
                     Expanded(
                       child: Form(
                         key: _formKey,
@@ -234,7 +233,7 @@ class _PublishState extends State<Publish> {
                           padding: const EdgeInsets.symmetric(horizontal: 24.0),
                           children: [
                             Text(
-                              'Property Details',
+                              'Details de la propriete',
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -249,7 +248,8 @@ class _PublishState extends State<Publish> {
                                     color: Colors.grey[100],
                                     border:
                                         Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 20.0),
                                   child: TextFormField(
@@ -689,7 +689,7 @@ class _PublishState extends State<Publish> {
                                     ),
                             ),
                             const SizedBox(
-                                height: 20), // Espace en bas pour le scroll
+                                height: 20), 
                           ],
                         ),
                       ),

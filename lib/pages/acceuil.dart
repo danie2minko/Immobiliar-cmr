@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:immobiliakamer/components/caroussel_img.dart';
 import 'package:immobiliakamer/components/mydrawer.dart';
 import 'package:immobiliakamer/components/myproducttile.dart';
 import 'package:immobiliakamer/models/products.dart';
@@ -175,9 +177,26 @@ class _AcceuilState extends State<Acceuil> {
 
           const SizedBox(height: 8),
 
+
+          //ajouter un carroussel
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 1
+              ),
+              items: [
+                CarousselImg(path: 'assets/images/maison3.jpg'),
+                CarousselImg(path: 'assets/images/maison2.jpg'),
+                CarousselImg(path: 'assets/images/maison1.jpg'),
+              ],
+            ),
+          ),
+
           // Liste des produits
           SizedBox(
-            height: 450,
+            height: 390,
             child: StreamBuilder<List<Products>>(
               stream: _productService.getProductsStream(),
               builder: (context, snapshot) {

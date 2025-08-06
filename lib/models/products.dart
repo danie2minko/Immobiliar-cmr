@@ -8,7 +8,7 @@ class Products {
   final String ville;
   final String quartier;
   final String description;
-  final String? ownerId; // Ajout de l'ID du propriétaire
+  final String? ownerId; 
   final String? ownerName;
   final String? ownerPhone;
   final String? ownerEmail;
@@ -22,7 +22,7 @@ class Products {
     required this.prix,
     required this.ville,
     required this.quartier,
-    this.ownerId, // Ajout au constructeur
+    this.ownerId, 
     this.ownerName,
     this.ownerPhone,
     this.ownerEmail,
@@ -41,7 +41,7 @@ class Products {
       prix: (map['prix'] ?? 0).toDouble(),
       ville: map['ville'] ?? '',
       quartier: map['quartier'] ?? '',
-      ownerId: map['ownerId'], // Ajout depuis la map
+      ownerId: map['ownerId'], 
       ownerName: map['ownerName'],
       ownerPhone: map['ownerPhone'],
       ownerEmail: map['ownerEmail'],
