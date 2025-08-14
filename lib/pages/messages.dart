@@ -67,6 +67,14 @@ class _MessagesState extends State<Messages> {
   Future<void> _initializeChat(String receiverId) async {
     try {
       final String currentUserId = _auth.currentUser!.uid;
+      final currentUser = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUserId)
+          .get();
+      final receiverUser = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(receiverId)
+          .get();
 
       // Construire l'ID de la salle de chat
       List<String> ids = [currentUserId, receiverId];
@@ -80,7 +88,7 @@ class _MessagesState extends State<Messages> {
           .get();
 
       if (!chatRoomDoc.exists) {
-        // Créer la discussion avec des métadonnées
+        // Créer la discussion avec des métadonnées et infos utilisateurs
         await FirebaseFirestore.instance
             .collection('chat_rooms')
             .doc(chatRoomId)
@@ -89,6 +97,16 @@ class _MessagesState extends State<Messages> {
           'createdAt': Timestamp.now(),
           'lastMessage': '',
           'lastMessageTime': Timestamp.now(),
+          'usersInfo': {
+            currentUserId: {
+              'username': currentUser.data()?['username'] ?? '',
+              'email': currentUser.data()?['email'] ?? '',
+            },
+            receiverId: {
+              'username': receiverUser.data()?['username'] ?? '',
+              'email': receiverUser.data()?['email'] ?? '',
+            },
+          },
         });
       }
     } catch (e) {
@@ -151,10 +169,9 @@ class _MessagesState extends State<Messages> {
     final args = ModalRoute.of(context)?.settings.arguments;
 
     // Si aucun argument n'est passé (ex: depuis la BottomNavBar),
-    // afficher la liste des conversations ou un message d'accueil.
+    // afficher la liste des conversations récentes.
     if (args == null) {
-      // TODO: Implémenter la liste des conversations récentes.
-      // Pour l'instant, on affiche un message d'accueil.
+      final String currentUserId = _auth.currentUser!.uid;
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
@@ -162,43 +179,109 @@ class _MessagesState extends State<Messages> {
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/messages.png',height: 200, width: 200,),
-              const SizedBox(height: 16),
-              Text(
-                'Pas de messages pour le moment',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+        body: StreamBuilder<QuerySnapshot>(
+          stream: _chatService.getUserConversations(currentUserId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              // Afficher le message uniquement si la liste est vraiment vide
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/messages.png',
+                        height: 200, width: 200),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Pas de messages pour le moment',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      child: Text(
+                        'Vos conversations apparaîtront ici.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurfaceVariant
+                              .withOpacity(0.7),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Text(
-                  'Vos conversations apparaîtront ici.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurfaceVariant
-                        .withOpacity(0.7),
-                  ),
-                ),
-              ),
-            ],
-          ),
+              );
+            }
+            final conversations = snapshot.data!.docs;
+            return ListView.separated(
+              itemCount: conversations.length,
+              separatorBuilder: (context, index) => Divider(height: 1),
+              itemBuilder: (context, index) {
+                final doc = conversations[index];
+                final data = doc.data() as Map<String, dynamic>;
+                final List participants = data['participants'] ?? [];
+                final String otherUserId = participants
+                    .firstWhere((id) => id != currentUserId, orElse: () => '');
+                final String lastMessage = data['lastMessage'] ?? '';
+                final Timestamp? lastMessageTime = data['lastMessageTime'];
+                // Chercher le nom ou l'email de l'autre utilisateur si disponible
+                String displayName = '';
+                if (data.containsKey('usersInfo') && data['usersInfo'] is Map) {
+                  final usersInfo = data['usersInfo'] as Map;
+                  final userInfo = usersInfo[otherUserId];
+                  if (userInfo != null) {
+                    if (userInfo['username'] != null &&
+                        (userInfo['username'] as String).isNotEmpty) {
+                      displayName = userInfo['username'];
+                    } else if (userInfo['email'] != null &&
+                        (userInfo['email'] as String).isNotEmpty) {
+                      displayName = userInfo['email'];
+                    }
+                  }
+                }
+                if (displayName.isEmpty) displayName = otherUserId;
+                return ListTile(
+                  leading: CircleAvatar(
+                      child: Text(displayName.isNotEmpty
+                          ? displayName[0].toUpperCase()
+                          : '?')),
+                  title: Text(displayName),
+                  subtitle: Text(lastMessage,
+                      maxLines: 1, overflow: TextOverflow.ellipsis),
+                  trailing: lastMessageTime != null
+                      ? Text(_formatTimestamp(lastMessageTime))
+                      : null,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Messages(),
+                        settings: RouteSettings(arguments: {
+                          'ownerId': otherUserId,
+                          'ownerName': displayName,
+                        }),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
         ),
       );
     }
 
     // Si les arguments ne sont pas du bon type, afficher une erreur.
-    if (args is! Products) {
+    if (args is! Products && args is! Map) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Erreur'),
@@ -239,8 +322,15 @@ class _MessagesState extends State<Messages> {
     }
 
     final product = args;
-    final String? receiverId = product.ownerId;
-    final String receiverName = product.ownerName ?? 'Annonceur';
+    String? receiverId;
+    String receiverName = 'Annonceur';
+    if (product is Products) {
+      receiverId = product.ownerId;
+      receiverName = product.ownerName ?? 'Annonceur';
+    } else if (product is Map) {
+      receiverId = product['ownerId'];
+      receiverName = product['ownerName'] ?? 'Annonceur';
+    }
 
     if (receiverId == null || receiverId.isEmpty) {
       return Scaffold(
@@ -758,7 +848,7 @@ class _MessagesState extends State<Messages> {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                   Icons.arrow_upward,
+                  Icons.arrow_upward,
                   color: _isComposing
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context)

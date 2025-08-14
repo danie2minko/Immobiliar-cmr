@@ -3,6 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:immobiliakamer/models/message.dart';
 
 class ChatServices {
+  // Récupérer la liste des conversations de l'utilisateur
+  Stream<QuerySnapshot> getUserConversations(String userId) {
+    return _firestore
+        .collection('chat_rooms')
+        .where('participants', arrayContains: userId)
+        .orderBy('lastMessageTime', descending: true)
+        .snapshots();
+  }
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -61,6 +70,12 @@ class ChatServices {
         .doc(chatRoomId)
         .collection('messages')
         .add(newMessage.toMap());
+
+    // Mettre à jour les métadonnées de la salle de chat
+    await _firestore.collection('chat_rooms').doc(chatRoomId).update({
+      'lastMessage': message,
+      'lastMessageTime': timestamp,
+    });
   }
 
   // Récupérer les messages

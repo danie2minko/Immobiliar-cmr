@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../services/auth_service.dart';
 
 class Login extends StatefulWidget {
@@ -96,7 +97,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   child: Icon(
-                    Icons.phone_android_rounded,
+                    Icons.phone_android,
                     size: 60,
                     color: Theme.of(context).colorScheme.primary,
                   ),
