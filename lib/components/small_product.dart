@@ -1,6 +1,7 @@
 // Fichier : components/small_product.dart (Version simplifiée et fonctionnelle)
 
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:immobiliakamer/models/products.dart';
 
 class SmallProduct extends StatelessWidget {
@@ -130,7 +131,7 @@ class SmallProduct extends StatelessWidget {
                                 }
                               },
                               icon: Center(
-                                child: const Icon(Icons.chat_bubble_outline,
+                                child: const Icon(Iconsax.message_add,
                                     size: 18, color: Colors.white),
                               ),
                               label: const Text('',

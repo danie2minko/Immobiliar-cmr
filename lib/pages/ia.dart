@@ -141,6 +141,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return CupertinoPageScaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       navigationBar: CupertinoNavigationBar(
+        automaticallyImplyLeading: false,
         middle: Text(appBarTitle),
         backgroundColor: CupertinoColors.systemGrey6,
         border: null,

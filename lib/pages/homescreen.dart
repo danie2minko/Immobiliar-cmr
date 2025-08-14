@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:immobiliakamer/pages/acceuil.dart';
 import 'package:immobiliakamer/pages/acheter.dart';
 import 'package:immobiliakamer/pages/partage.dart';
@@ -39,13 +40,14 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[_selectedIndex],
-
-      //navigation bar
-
       bottomNavigationBar: Container(
-        color: Colors.black,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(50)
+        ),
+        margin: EdgeInsets.only(bottom: 15, left: 5, right: 5),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: GNav(
             selectedIndex: _selectedIndex,
             onTabChange: _navigateBottomBar,
@@ -57,19 +59,19 @@ class _HomescreenState extends State<Homescreen> {
             padding: const EdgeInsets.all(16),
             tabs: [
               GButton(
-                icon: Icons.home,
+                icon: Iconsax.home,
                 text: "Acceuil",
               ),
               GButton(
-                icon: Icons.shopping_cart_rounded,
+                icon: Iconsax.shopping_cart,
                 text: "Achat",
               ),
               GButton(
-                icon: Icons.upload,
+                icon: Iconsax.document_upload,
                 text: "Partage",
               ),
               GButton(
-                icon: Icons.message_rounded,
+                icon: Iconsax.messages,
                 text: "Messages",
               ),
             ],

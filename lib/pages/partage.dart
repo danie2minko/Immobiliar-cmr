@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../services/product_service.dart';
@@ -240,24 +241,30 @@ class _PublishState extends State<Publish> {
                                 color: Colors.black,
                               ),
                             ),
-                            //SizedBox(height: 2),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                            SizedBox(height: 2),
+                            
+                              Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                                   child: TextFormField(
                                     controller: _typeController,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
                                       hintText: 'Type de bien',
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -267,26 +274,31 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            //const SizedBox(height: 5),
+                              
+                            const SizedBox(height: 5),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                                   child: TextFormField(
                                     controller: _prixController,
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
                                       hintText: 'Prix',
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -299,25 +311,31 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            //const SizedBox(height: 5),
+                              
+                            
+                            const SizedBox(height: 5),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   child: TextFormField(
                                     controller: _villeController,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
                                       hintText: 'Ville',
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -327,25 +345,31 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            //const SizedBox(height: 5),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                              
+                            
+                            const SizedBox(height: 5),
+                           Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
                                   child: TextFormField(
                                     controller: _quartierController,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
                                       hintText: 'Quartier',
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -355,25 +379,30 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                height: 100,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                              
+                            
+                           Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   child: TextFormField(
                                     controller: _descriptionController,
                                     maxLines: 3,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200,
                                       hintText: 'Description',
                                     ),
                                     validator: (value) {
@@ -384,8 +413,8 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
+                              
+                            
                             // Widget pour l'upload d'image
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
@@ -441,9 +470,9 @@ class _PublishState extends State<Publish> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Icon(
-                                                Icons.add_a_photo,
-                                                size: 50,
-                                                color: Colors.grey,
+                                                Iconsax.gallery_add,
+                                                size: 40,
+                                                color: Colors.grey.shade300,
                                               ),
                                               const SizedBox(height: 10),
                                               Text(
@@ -463,7 +492,7 @@ class _PublishState extends State<Publish> {
                                                       .colorScheme
                                                       .primary,
                                                   borderRadius:
-                                                      BorderRadius.circular(20),
+                                                      BorderRadius.circular(10),
                                                 ),
                                                 child: Text(
                                                   'Choisir une image',
@@ -480,7 +509,7 @@ class _PublishState extends State<Publish> {
                             const SizedBox(height: 10),
 
                             Text(
-                              'Owner Details',
+                              'Details du proprietaire',
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -542,9 +571,9 @@ class _PublishState extends State<Publish> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Icon(
-                                                Icons.add_a_photo,
-                                                size: 50,
-                                                color: Colors.grey,
+                                                Iconsax.gallery_add,
+                                                size: 40,
+                                                color: Colors.grey.shade300,
                                               ),
                                               const SizedBox(height: 10),
                                               Text(
@@ -564,7 +593,7 @@ class _PublishState extends State<Publish> {
                                                       .colorScheme
                                                       .primary,
                                                   borderRadius:
-                                                      BorderRadius.circular(20),
+                                                      BorderRadius.circular(10),
                                                 ),
                                                 child: Text(
                                                   'Choisir une image',
@@ -582,20 +611,26 @@ class _PublishState extends State<Publish> {
                             //SizedBox(height: 5),
 
                             Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
                                   child: TextFormField(
                                     controller: _ownerNameController,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200,
                                       hintText: 'Nom du propriétaire',
                                     ),
                                     validator: (value) {
@@ -606,24 +641,30 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                             
+                          
+                           Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   child: TextFormField(
                                     controller: _ownerPhoneController,
                                     keyboardType: TextInputType.phone,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200,
                                       hintText: 'Téléphone',
                                     ),
                                     validator: (value) {
@@ -634,24 +675,30 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade100),
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
+                              
+                            
+                           Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                                   child: TextFormField(
                                     controller: _ownerEmailController,
                                     keyboardType: TextInputType.emailAddress,
                                     decoration: InputDecoration(
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF0D986A),width: 2
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey.shade200,
                                       hintText: 'Email',
                                     ),
                                     validator: (value) {
@@ -665,8 +712,8 @@ class _PublishState extends State<Publish> {
                                     },
                                   ),
                                 ),
-                              ),
-                            ),
+                              
+                            
                             const SizedBox(height: 24),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(

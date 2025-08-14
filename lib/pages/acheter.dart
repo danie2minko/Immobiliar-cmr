@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:immobiliakamer/components/mydrawer.dart';
 import 'package:immobiliakamer/components/small_product.dart';
 import 'package:immobiliakamer/models/products.dart';
@@ -48,7 +49,7 @@ class _AcheterState extends State<Acheter> {
                 hintStyle: TextStyle(
                   color: Colors.grey.shade300
                 ),
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: Icon(Iconsax.search_normal,color: Colors.grey.shade300,),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -80,7 +81,7 @@ class _AcheterState extends State<Acheter> {
                   if (_selectedCity != null)
                     Chip(
                       label: Text(_selectedCity!),
-                      deleteIcon: Icon(Icons.close),
+                      deleteIcon: Icon(Iconsax.close_circle),
                       onDeleted: () {
                         setState(() {
                           _selectedCity = null;
@@ -90,7 +91,7 @@ class _AcheterState extends State<Acheter> {
                   if (_maxPrice != null)
                     Chip(
                       label: Text('Max: \$${_maxPrice!.toStringAsFixed(0)}'),
-                      deleteIcon: Icon(Icons.close),
+                      deleteIcon: Icon(Iconsax.close_circle),
                       onDeleted: () {
                         setState(() {
                           _maxPrice = null;

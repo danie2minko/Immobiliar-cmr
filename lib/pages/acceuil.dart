@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:immobiliakamer/components/caroussel_img.dart';
 import 'package:immobiliakamer/components/mydrawer.dart';
 import 'package:immobiliakamer/components/myproducttile.dart';
@@ -45,7 +46,7 @@ class _AcceuilState extends State<Acceuil> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
-                  Icons.person,
+                  Iconsax.profile_circle,
                   color: Theme.of(context).colorScheme.secondary,
                   size: 22,
                 ),
@@ -86,7 +87,7 @@ class _AcceuilState extends State<Acceuil> {
                     fontSize: 16,
                   ),
                   prefixIcon: Icon(
-                    Icons.search_rounded,
+                    Iconsax.search_normal,
                     color: Theme.of(context).colorScheme.secondary,
                     size: 22,
                   ),
