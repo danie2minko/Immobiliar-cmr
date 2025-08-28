@@ -22,7 +22,7 @@ class _AcceuilState extends State<Acceuil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -59,7 +59,7 @@ class _AcceuilState extends State<Acceuil> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: ListView(
         children: [
-          // Barre de recherche 
+          // Barre de recherche
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             child: Container(
@@ -178,14 +178,16 @@ class _AcceuilState extends State<Acceuil> {
 
           const SizedBox(height: 8),
 
-
-          //ajouter un carroussel
+          //carroussel
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: CarouselSlider(
               options: CarouselOptions(
-                viewportFraction: 1
+                viewportFraction: 1,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
               ),
               items: [
                 CarousselImg(path: 'assets/images/maison3.jpg'),
@@ -253,7 +255,9 @@ class _AcceuilState extends State<Acceuil> {
                   padding: const EdgeInsets.all(10),
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];
-                    return Myproducttile(products: product,);
+                    return Myproducttile(
+                      products: product,
+                    );
                   },
                 );
               },

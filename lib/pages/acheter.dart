@@ -23,7 +23,7 @@ class _AcheterState extends State<Acheter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Acheter"),
@@ -46,21 +46,22 @@ class _AcheterState extends State<Acheter> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Rechercher un bien...',
-                hintStyle: TextStyle(
+                hintStyle: TextStyle(color: Colors.grey.shade300),
+                prefixIcon: Icon(
+                  Iconsax.search_normal,
                   color: Colors.grey.shade300
                 ),
-                prefixIcon: Icon(Iconsax.search_normal,color: Colors.grey.shade300,),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade200,width: 4,
-                  )
-                ),
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade200,
+                      width: 4,
+                    )),
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey[900] : Colors.grey.shade200,
               ),
               onChanged: (value) {
                 setState(() {
@@ -157,23 +158,22 @@ class _AcheterState extends State<Acheter> {
                 return GridView.builder(
                   padding: const EdgeInsets.all(5),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 2,
-                    crossAxisSpacing: 3,
-                    childAspectRatio: 0.7
-                  ),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 2,
+                      crossAxisSpacing: 3,
+                      childAspectRatio: 0.7),
                   itemCount: filteredProducts.length,
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];
                     return
-                     // height:MediaQuery.of(context).size.height * 0.6, // hauteur responsive
-                      
-                       Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: SmallProduct(
-                            products: product // largeur responsive
-                                             ),
-                       );
+                        // height:MediaQuery.of(context).size.height * 0.6, // hauteur responsive
+
+                        Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child:
+                          SmallProduct(products: product // largeur responsive
+                              ),
+                    );
                   },
                 );
               },

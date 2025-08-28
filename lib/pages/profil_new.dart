@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../services/auth_service.dart';
@@ -247,7 +248,7 @@ class _ProfilState extends State<Profil> {
                                           : null,
                                     ),
                                     child: _profileImage == null
-                                        ? Icon(Icons.person,
+                                        ? Icon(Iconsax.profile_circle,
                                             size: 100,
                                             color: Colors.grey.shade700)
                                         : null,

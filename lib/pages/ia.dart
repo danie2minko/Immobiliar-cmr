@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:immobiliakamer/models/products.dart';
 
-// Un modèle simple pour représenter un message de chat
+//modèle simple pour représenter un message de chat
 class ChatMessage {
   final String text;
   final bool
-      isUser; // Vrai si le message vient de l'utilisateur, faux si c'est l'IA
+      isUser; 
 
   ChatMessage({required this.text, required this.isUser});
 }
 
 class ChatScreen extends StatefulWidget {
-  // Le widget accepte un produit (optionnel)
+  
   final Products? product;
 
   const ChatScreen({super.key, this.product});
@@ -56,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void _handleSubmitted(String text) {
     if (text.trim().isEmpty) return;
 
-    // Ajouter le message de l'utilisateur à la liste des messages de l'UI
+    
     _addMessage(text, true);
     _textController.clear();
 
@@ -72,9 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
       );
     }).toList();
 
-    // Si c'est le premier message de l'utilisateur concernant un produit,
-    // nous modifions l'historique pour inclure le contexte du produit.
-    // L'UI affichera la question simple, mais Gemini obtient le contexte complet.
+    
     if (widget.product != null &&
         _messages.where((m) => m.isUser).length == 1) {
       final product = widget.product!;
@@ -101,14 +99,14 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     }
 
-    // Appeler l'API Gemini
+    //l'API Gemini
     _gemini.chat(history).then((value) {
       final aiResponse =
           value?.output ?? "Désolé, je n'ai pas pu trouver de réponse.";
       _addMessage(aiResponse, false);
     }).catchError((e) {
       _addMessage(
-          "Oups, une erreur s'est produite. Vérifiez votre connexion ou votre clé API.",
+          "Oups, une erreur s'est produite. Vérifiez votre connexion.",
           false);
     }).whenComplete(() {
       setState(() {
@@ -134,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Le titre de l'AppBar est dynamique
+    
     final appBarTitle =
         widget.product != null ? 'Analyse du bien' : 'ImmobiliaBot';
 
@@ -152,7 +150,7 @@ class _ChatScreenState extends State<ChatScreen> {
             // Liste des messages
             Expanded(
               child: ListView.builder(
-                reverse: true, // Affiche les messages du bas vers le haut
+                reverse: true, 
                 controller: _scrollController,
                 padding: const EdgeInsets.all(12.0),
                 itemCount: _messages.length + (_isAiTyping ? 1 : 0),
@@ -178,7 +176,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final alignment =
         message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start;
     final bubbleColor =
-        message.isUser ? Theme.of(context).colorScheme.primary : Colors.black;
+        message.isUser ? Theme.of(context).colorScheme.primary : Colors.grey.shade700;
     final textColor =
         message.isUser ? CupertinoColors.white : CupertinoColors.white;
     final borderRadius = message.isUser
@@ -263,7 +261,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               onSubmitted: _handleSubmitted,
               onChanged: (text) {
-                setState(() {}); // Pour mettre à jour l'état du bouton d'envoi
+                setState(() {}); 
               },
             ),
           ),
@@ -272,7 +270,7 @@ class _ChatScreenState extends State<ChatScreen> {
             padding: EdgeInsets.zero,
             onPressed: _textController.text.trim().isNotEmpty
                 ? () => _handleSubmitted(_textController.text)
-                : null, // Le bouton est désactivé si le champ est vide
+                : null, 
             child: Icon(
               Icons.arrow_upward,
               size: 32,

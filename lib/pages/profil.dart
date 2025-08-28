@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../services/auth_service.dart';
@@ -62,8 +63,7 @@ class _ProfilState extends State<Profil> {
           _profileImage = File(image.path);
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text("Photo de profil mise à jour ! ")),
+          SnackBar(content: Text("Photo de profil mise à jour ! ")),
         );
       }
     } catch (e) {
@@ -109,7 +109,7 @@ class _ProfilState extends State<Profil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Profil"),
@@ -135,9 +135,6 @@ class _ProfilState extends State<Profil> {
                                     width: 130,
                                     height: 130,
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
                                       borderRadius: BorderRadius.circular(75),
                                       image: _profileImage != null
                                           ? DecorationImage(
@@ -147,9 +144,13 @@ class _ProfilState extends State<Profil> {
                                           : null,
                                     ),
                                     child: _profileImage == null
-                                        ? Icon(Icons.person,
+                                        ? Icon(
+                                            Iconsax.profile_circle,
                                             size: 100,
-                                            color: Colors.grey.shade700)
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          )
                                         : null,
                                   ),
                                   Positioned(
@@ -319,7 +320,10 @@ class _ProfilState extends State<Profil> {
       width: 350,
       padding: const EdgeInsets.only(left: 10, top: 5, right: 10),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey[900]
+                                        : Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -335,7 +339,7 @@ class _ProfilState extends State<Profil> {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          Icon(Icons.edit, color: Colors.grey.shade600, size: 20),
+          Icon(Iconsax.edit, color: Colors.grey.shade600, size: 20),
         ],
       ),
     );
@@ -347,7 +351,10 @@ class _ProfilState extends State<Profil> {
       width: 350,
       padding: const EdgeInsets.only(left: 10, top: 15, right: 10),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey[900]
+                                        : Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(

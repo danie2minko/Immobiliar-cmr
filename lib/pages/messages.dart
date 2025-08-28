@@ -76,7 +76,7 @@ class _MessagesState extends State<Messages> {
           .doc(receiverId)
           .get();
 
-      // Construire l'ID de la salle de chat
+      // l'ID de la salle de chat
       List<String> ids = [currentUserId, receiverId];
       ids.sort();
       String chatRoomId = ids.join('_');
@@ -123,7 +123,7 @@ class _MessagesState extends State<Messages> {
 
   @override
   Widget build(BuildContext context) {
-    // Vérifier d'abord si l'utilisateur est connecté
+    
     if (_auth.currentUser == null) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -168,8 +168,7 @@ class _MessagesState extends State<Messages> {
     // Récupérer les arguments passés depuis la route avec vérification
     final args = ModalRoute.of(context)?.settings.arguments;
 
-    // Si aucun argument n'est passé (ex: depuis la BottomNavBar),
-    // afficher la liste des conversations récentes.
+    
     if (args == null) {
       final String currentUserId = _auth.currentUser!.uid;
       return Scaffold(
@@ -668,23 +667,20 @@ class _MessagesState extends State<Messages> {
                   maxWidth: MediaQuery.of(context).size.width * 0.7,
                 ),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: isCurrentUser
                       ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context)
-                          .colorScheme
-                          .surfaceVariant
-                          .withOpacity(0.8),
+                      : Colors.grey.shade300,
                   borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(20),
-                    topRight: const Radius.circular(20),
+                    topLeft: const Radius.circular(15),
+                    topRight: const Radius.circular(15),
                     bottomLeft: isCurrentUser
-                        ? const Radius.circular(20)
+                        ? const Radius.circular(15)
                         : const Radius.circular(4),
                     bottomRight: isCurrentUser
                         ? const Radius.circular(4)
-                        : const Radius.circular(20),
+                        : const Radius.circular(15),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -709,7 +705,7 @@ class _MessagesState extends State<Messages> {
                       ),
                     ),
 
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
 
                     // Heure du message
                     Text(

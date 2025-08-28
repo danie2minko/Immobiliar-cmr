@@ -161,9 +161,10 @@ class _PublishState extends State<Publish> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text('Publier un bien'),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         centerTitle: true,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
       ),
       body: Stack(
         children: [
@@ -172,7 +173,11 @@ class _PublishState extends State<Publish> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 60),
-            child: Image.asset('assets/images/update.png', height: 300,width: 300,),
+            child: Image.asset(
+              'assets/images/update.png',
+              height: 300,
+              width: 300,
+            ),
           ),
           Positioned(
             child: Text('Partagez votre bien',
@@ -190,14 +195,12 @@ class _PublishState extends State<Publish> {
             initialChildSize: 0.3,
             minChildSize: 0.3,
             maxChildSize: 0.9,
-
             snap: true,
-            snapSizes: const [0.3, 0.9], 
-
+            snapSizes: const [0.3, 0.9],
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -214,18 +217,17 @@ class _PublishState extends State<Publish> {
                 // Le contenu du sheet
                 child: Column(
                   children: [
-                    
                     Container(
                       width: 40,
                       height: 5,
                       margin: const EdgeInsets.symmetric(vertical: 12.0),
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey[700]
+                            : Colors.grey[300],
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-
-                    
                     Expanded(
                       child: Form(
                         key: _formKey,
@@ -238,193 +240,218 @@ class _PublishState extends State<Publish> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             SizedBox(height: 2),
-                            
-                              Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                  child: TextFormField(
-                                    controller: _typeController,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 5),
+                              child: TextFormField(
+                                controller: _typeController,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      hintText: 'Type de bien',
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer le type de bien';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: 'Type de bien',
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
                                 ),
-                              
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer le type de bien';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
                             const SizedBox(height: 5),
                             Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                  child: TextFormField(
-                                    controller: _prixController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 5),
+                              child: TextFormField(
+                                controller: _prixController,
+                                keyboardType: TextInputType.number,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      hintText: 'Prix',
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer le prix';
-                                      }
-                                      if (double.tryParse(value) == null) {
-                                        return 'Veuillez entrer un prix valide';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: 'Prix',
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
                                 ),
-                              
-                            
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer le prix';
+                                  }
+                                  if (double.tryParse(value) == null) {
+                                    return 'Veuillez entrer un prix valide';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
                             const SizedBox(height: 5),
                             Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _villeController,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _villeController,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      hintText: 'Ville',
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer la ville';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: 'Ville',
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
                                 ),
-                              
-                            
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer la ville';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
                             const SizedBox(height: 5),
-                           Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _quartierController,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _quartierController,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      hintText: 'Quartier',
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer le quartier';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: 'Quartier',
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
                                 ),
-                              
-                            
-                           Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _descriptionController,
-                                    maxLines: 3,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer le quartier';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _descriptionController,
+                                maxLines: 3,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200,
-                                      hintText: 'Description',
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer une description';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
+                                  hintText: 'Description',
                                 ),
-                              
-                            
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer une description';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
                             // Widget pour l'upload d'image
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: Container(
                                 height: 200,
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    border:
-                                        Border.all(color: Colors.grey.shade300),
-                                    borderRadius: BorderRadius.circular(15)),
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: _selectedImage != null
                                     ? Stack(
                                         children: [
@@ -513,7 +540,7 @@ class _PublishState extends State<Publish> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
 
@@ -522,7 +549,10 @@ class _PublishState extends State<Publish> {
                               child: Container(
                                 height: 200,
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[100],
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey[900]
+                                        : Colors.grey.shade200,
                                     border:
                                         Border.all(color: Colors.grey.shade300),
                                     borderRadius: BorderRadius.circular(15)),
@@ -611,109 +641,121 @@ class _PublishState extends State<Publish> {
                             //SizedBox(height: 5),
 
                             Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _ownerNameController,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _ownerNameController,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200,
-                                      hintText: 'Nom du propriétaire',
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer le nom du propriétaire';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
+                                  hintText: 'Nom du propriétaire',
                                 ),
-                             
-                          
-                           Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _ownerPhoneController,
-                                    keyboardType: TextInputType.phone,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer le nom du propriétaire';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _ownerPhoneController,
+                                keyboardType: TextInputType.phone,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200,
-                                      hintText: 'Téléphone',
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer le numéro de téléphone';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
+                                  hintText: 'Téléphone',
                                 ),
-                              
-                            
-                           Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                  child: TextFormField(
-                                    controller: _ownerEmailController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF0D986A),width: 2
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer le numéro de téléphone';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: TextFormField(
+                                controller: _ownerEmailController,
+                                keyboardType: TextInputType.emailAddress,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.grey),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFF0D986A), width: 2),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.grey.shade200,
-                                      hintText: 'Email',
-                                    ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Veuillez entrer l\'email';
-                                      }
-                                      if (!value.contains('@')) {
-                                        return 'Veuillez entrer un email valide';
-                                      }
-                                      return null;
-                                    },
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  filled: true,
+                                  fillColor: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.grey[900]
+                                      : Colors.grey.shade200,
+                                  hintText: 'Email',
                                 ),
-                              
-                            
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez entrer l\'email';
+                                  }
+                                  if (!value.contains('@')) {
+                                    return 'Veuillez entrer un email valide';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
                             const SizedBox(height: 24),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -735,8 +777,7 @@ class _PublishState extends State<Publish> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                             ),
-                            const SizedBox(
-                                height: 20), 
+                            const SizedBox(height: 20),
                           ],
                         ),
                       ),
