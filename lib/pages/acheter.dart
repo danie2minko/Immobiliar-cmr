@@ -166,8 +166,6 @@ class _AcheterState extends State<Acheter> {
                   itemBuilder: (context, index) {
                     final product = filteredProducts[index];
                     return
-                        // height:MediaQuery.of(context).size.height * 0.6, // hauteur responsive
-
                         Padding(
                       padding: const EdgeInsets.all(8.0),
                       child:

@@ -159,36 +159,28 @@ class _PublishState extends State<Publish> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: const Text('Publier un bien'),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        elevation: 0,
-        centerTitle: true,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
-      ),
       body: Stack(
         children: [
-          SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 60),
+          Container(
+            height: 300,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 60),
             child: Image.asset(
               'assets/images/update.png',
               height: 300,
               width: 300,
             ),
           ),
-          Positioned(
-            child: Text('Partagez votre bien',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                )),
-            top: 260,
-            left: 15,
           ),
+          
+          
           // draggable sheet
           DraggableScrollableSheet(
             controller: _controller,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:immobiliakamer/models/products.dart';
@@ -17,16 +19,12 @@ class _MessagesState extends State<Messages> {
   final ChatServices _chatService = ChatServices();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ScrollController _scrollController = ScrollController();
-  bool _isComposing = false;
+  // bool _isComposing = false; // moved to MessageInputBar
 
   @override
   void initState() {
     super.initState();
-    _messageController.addListener(() {
-      setState(() {
-        _isComposing = _messageController.text.trim().isNotEmpty;
-      });
-    });
+    // No longer needed here, handled in MessageInputBar
   }
 
   void sendMessage(String receiverId) async {
@@ -35,9 +33,9 @@ class _MessagesState extends State<Messages> {
         await _chatService.sendMessage(
             receiverId, _messageController.text.trim());
         _messageController.clear();
-        setState(() {
-          _isComposing = false;
-        });
+        // setState(() {
+        //   _isComposing = false;
+        // });
 
         // Auto-scroll vers le bas après l'envoi
         if (_scrollController.hasClients) {
@@ -123,7 +121,6 @@ class _MessagesState extends State<Messages> {
 
   @override
   Widget build(BuildContext context) {
-    
     if (_auth.currentUser == null) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -168,7 +165,6 @@ class _MessagesState extends State<Messages> {
     // Récupérer les arguments passés depuis la route avec vérification
     final args = ModalRoute.of(context)?.settings.arguments;
 
-    
     if (args == null) {
       final String currentUserId = _auth.currentUser!.uid;
       return Scaffold(
@@ -181,10 +177,20 @@ class _MessagesState extends State<Messages> {
         body: StreamBuilder<QuerySnapshot>(
           stream: _chatService.getUserConversations(currentUserId),
           builder: (context, snapshot) {
+            print('Erreur: ${snapshot.error}');
+            // Robust handling of snapshot state
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Erreur: ${snapshot.error}'));
+            }
+            final docs = snapshot.data?.docs;
+            if (docs == null) {
+              // Data not ready yet, show loading
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (docs.isEmpty) {
               // Afficher le message uniquement si la liste est vraiment vide
               return Center(
                 child: Column(
@@ -220,12 +226,11 @@ class _MessagesState extends State<Messages> {
                 ),
               );
             }
-            final conversations = snapshot.data!.docs;
             return ListView.separated(
-              itemCount: conversations.length,
+              itemCount: docs.length,
               separatorBuilder: (context, index) => Divider(height: 1),
               itemBuilder: (context, index) {
-                final doc = conversations[index];
+                final doc = docs[index];
                 final data = doc.data() as Map<String, dynamic>;
                 final List participants = data['participants'] ?? [];
                 final String otherUserId = participants
@@ -473,7 +478,10 @@ class _MessagesState extends State<Messages> {
             child: _buildMessageList(receiverId),
           ),
           // Champ de saisie et bouton d'envoi
-          _buildMessageInput(receiverId),
+          MessageInputBar(
+            messageController: _messageController,
+            onSend: (msg) => sendMessage(receiverId ?? ""),
+          ),
         ],
       ),
     );
@@ -779,8 +787,48 @@ class _MessagesState extends State<Messages> {
     }
   }
 
-  // Widget pour le champ de saisie
-  Widget _buildMessageInput(String receiverId) {
+// Message input bar extracted as a separate widget to avoid unnecessary rebuilds
+}
+
+class MessageInputBar extends StatefulWidget {
+  final TextEditingController messageController;
+  final void Function(String) onSend;
+  const MessageInputBar({
+    Key? key,
+    required this.messageController,
+    required this.onSend,
+  }) : super(key: key);
+
+  @override
+  State<MessageInputBar> createState() => _MessageInputBarState();
+}
+
+class _MessageInputBarState extends State<MessageInputBar> {
+  bool _isComposing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.messageController.addListener(_handleTextChanged);
+  }
+
+  void _handleTextChanged() {
+    final composing = widget.messageController.text.trim().isNotEmpty;
+    if (composing != _isComposing) {
+      setState(() {
+        _isComposing = composing;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.messageController.removeListener(_handleTextChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -810,7 +858,7 @@ class _MessagesState extends State<Messages> {
                   ),
                 ),
                 child: TextField(
-                  controller: _messageController,
+                  controller: widget.messageController,
                   decoration: InputDecoration(
                     hintText: 'Tapez votre message...',
                     hintStyle: TextStyle(
@@ -827,13 +875,15 @@ class _MessagesState extends State<Messages> {
                   ),
                   maxLines: null,
                   textCapitalization: TextCapitalization.sentences,
-                  onSubmitted: (text) => sendMessage(receiverId),
+                  onSubmitted: (text) => widget.onSend(text),
                 ),
               ),
             ),
             const SizedBox(width: 12),
             GestureDetector(
-              onTap: _isComposing ? () => sendMessage(receiverId) : null,
+              onTap: _isComposing
+                  ? () => widget.onSend(widget.messageController.text)
+                  : null,
               child: Container(
                 width: 44,
                 height: 44,

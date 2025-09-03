@@ -42,9 +42,7 @@ class _HomescreenState extends State<Homescreen> {
       body: screens[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(50)
-        ),
+            color: Colors.black, borderRadius: BorderRadius.circular(50)),
         margin: EdgeInsets.only(bottom: 15, left: 5, right: 5),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

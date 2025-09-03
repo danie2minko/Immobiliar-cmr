@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:immobiliakamer/models/message.dart';
@@ -5,6 +7,7 @@ import 'package:immobiliakamer/models/message.dart';
 class ChatServices {
   // Récupérer la liste des conversations de l'utilisateur
   Stream<QuerySnapshot> getUserConversations(String userId) {
+    print("USERID:: $userId");
     return _firestore
         .collection('chat_rooms')
         .where('participants', arrayContains: userId)
