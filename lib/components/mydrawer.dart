@@ -44,10 +44,10 @@ class Mydrawer extends StatelessWidget {
           ),
 
           Mylisttile(
-              text: "P A R A M E T R E S", icon: Iconsax.setting, onTap: () {}),
+              text: "P A R A M E T R E S", icon: Iconsax.setting, onTap: () => Navigator.pushNamed(context, '/parametres')),
 
           Mylisttile(
-              text: "A P R O P O S", icon: Iconsax.info_circle, onTap: () {}),
+              text: "A P R O P O S", icon: Iconsax.info_circle, onTap: () => Navigator.pushNamed(context, '/apropos')),
           SizedBox(
             height: 40,
           ),

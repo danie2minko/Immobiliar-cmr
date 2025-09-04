@@ -111,7 +111,6 @@ class _ProfilState extends State<Profil> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Profil"),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,

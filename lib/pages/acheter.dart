@@ -25,7 +25,6 @@ class _AcheterState extends State<Acheter> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Acheter"),
         actions: [
           IconButton(
@@ -52,13 +51,13 @@ class _AcheterState extends State<Acheter> {
                   color: Colors.grey.shade300
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
                       color: Colors.grey.shade200,
-                      width: 4,
+                      width: 2,
                     )),
                 filled: true,
                 fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.grey[900] : Colors.grey.shade200,

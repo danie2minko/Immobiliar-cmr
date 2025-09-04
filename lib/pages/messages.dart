@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:immobiliakamer/models/products.dart';
 import 'package:immobiliakamer/chat/chatServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -655,15 +656,8 @@ class _MessagesState extends State<Messages> {
               // Avatar de l'expéditeur (côté gauche)
               CircleAvatar(
                 radius: 16,
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                child: Text(
-                  senderEmail.isNotEmpty ? senderEmail[0].toUpperCase() : '?',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(Icons.person, color: Colors.white,size: 16,)
               ),
               const SizedBox(width: 8),
             ],
@@ -679,7 +673,7 @@ class _MessagesState extends State<Messages> {
                 decoration: BoxDecoration(
                   color: isCurrentUser
                       ? Theme.of(context).colorScheme.primary
-                      : Colors.grey.shade300,
+                      : Colors.grey.shade800,
                   borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(15),
                     topRight: const Radius.circular(15),

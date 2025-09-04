@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:immobiliakamer/pages/apropos.dart';
+import 'package:immobiliakamer/pages/parametres.dart';
 import 'package:immobiliakamer/pages/splashcreen.dart';
 // ...existing code...
 import 'package:provider/provider.dart';
@@ -63,6 +65,8 @@ class MyApp extends StatelessWidget {
             },
             '/acheter': (context) => const Acheter(),
             '/partage': (context) => const Publish(),
+            '/apropos': (context) => const Apropos(),
+            '/parametres': (context) => const Parametres(),
           },
         ),
       ),

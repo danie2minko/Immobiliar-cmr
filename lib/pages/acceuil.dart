@@ -24,7 +24,6 @@ class _AcceuilState extends State<Acceuil> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Accueil",
           style: TextStyle(
